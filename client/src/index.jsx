@@ -12,6 +12,7 @@ const apiUrl = 'http://localhost:1128/repos';
 const App = () => {
 
   const [repos, setRepos] = useState([]);
+  const [counts, setCounts] = useState({});
 
   const getRepos = (callback) => {
     $.ajax({
@@ -34,6 +35,7 @@ const App = () => {
       data: JSON.stringify(user),
       contentType: 'application/json',
       success: function(results) {
+        setCounts(results);
         getRepos(setRepos);
       },
       error: function(err) {
@@ -56,6 +58,11 @@ const App = () => {
     <div>
       <h1>Github Fetcher</h1>
       <Search onSearch={search} />
+      {
+        Object.keys(counts).length > 0
+        ? <div>{counts.newCount} new repos imported, {counts.updateCount} repos updated</div>
+        : null
+      }
       <RepoList repos={repos} />
     </div>
   );

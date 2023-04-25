@@ -19,7 +19,9 @@ app.post('/repos', function (req, res) {
 
   github.getReposByUsername(req.body.username)
     .then(repos => db.save(repos))
-    .then(() => res.sendStatus(201))
+    .then((counts) => {
+      res.status(201).json(counts);
+    })
     .catch(err => {
       console.error(err);
       res.sendStatus(404);
