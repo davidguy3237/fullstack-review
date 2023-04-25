@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import $ from 'jquery';
 
 const Search = ({ onSearch }) => {
 
@@ -15,7 +16,7 @@ const Search = ({ onSearch }) => {
   return (
     <div>
       <h4>Add more repos!</h4>
-      Enter a github username: <input value={term} onChange={onChange}/>
+      Enter a github username: <input id='search-bar' onChange={onChange}/>
       <button onClick={search}> Add Repos </button>
     </div>
   );
